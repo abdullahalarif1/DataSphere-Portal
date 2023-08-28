@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+.bg{
+  @apply  bg-gradient-to-b from-slate-900 to-slate-800
+}
