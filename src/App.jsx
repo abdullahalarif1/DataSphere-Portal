@@ -1,13 +1,8 @@
-
+import axios from "axios";
 import "./App.css";
 
 function App() {
-
-  return (
-    <>
-      <h1>HOme</h1>
-    </>
-  );
+  return <></>;
 }
 
 export default App;
