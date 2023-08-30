@@ -41,7 +41,7 @@ const Home = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire("Deleted!", "Your Contact has been deleted.", "success");
-        axios.delete(`http://localhost:5000/${_id}`).then((res) => {
+        axios.delete(`http://localhost:5000/voter-data/${_id}`).then((res) => {
           if (res.data.deletedCount > 0) {
             const remaining = voters.filter((t) => t._id !== _id);
             setVoters(remaining);
@@ -55,7 +55,7 @@ const Home = () => {
     <div className="py-14 px-5 ">
       <div>
         <h1 className="text-3xl text-white text-center uppercase  pt-5">
-          <span className="text-warning">Voters </span>List
+          <span className="text-warning">Voters </span>List-({voters.length})
         </h1>
       </div>
       <div className=" flex justify-between items-center ">

@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
 import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Dashboard from "./Pages/Dashboard.jsx";
@@ -28,7 +27,7 @@ const router = createBrowserRouter([
         element: <AddNew />,
       },
       {
-        path: "adminDashboard",
+        path: "/adminDashboard",
         element: <AllUsers />,
       },
     ],

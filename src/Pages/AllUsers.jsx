@@ -50,6 +50,9 @@ const AllUsers = () => {
 
   return (
     <div className="py-14 px-5 ">
+      <h1 className="text-3xl text-white text-center uppercase  py-10">
+        <span className="text-warning">Manage All </span>Users
+      </h1>
       <div className="overflow-x-auto ">
         <table className="table  text-white text-center">
           {/* head*/}

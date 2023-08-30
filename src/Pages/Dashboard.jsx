@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   AiOutlineLogin,
   AiOutlineLogout,
   AiOutlineMenuFold,
 } from "react-icons/ai";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
-import { FcAddDatabase, FcList } from "react-icons/fc";
+import { FcAddDatabase, FcHome, FcList } from "react-icons/fc";
 import { AuthContext } from "../providers/AuthProvider";
 import useAdmin from "../components/useAdmin";
 
@@ -21,6 +21,12 @@ const Dashboard = () => {
   };
 
   const [isAdmin] = useAdmin();
+
+  useEffect(() => {
+    if (isAdmin) {
+      navigate("/adminDashboard");
+    }
+  }, [isAdmin, navigate]);
 
   return (
     <div className="drawer lg:drawer-open text-white">
@@ -41,7 +47,11 @@ const Dashboard = () => {
 
           {isAdmin ? (
             <>
-             
+              <li className="hover:text-warning md:border-r border-warning">
+                <NavLink to={"/"}>
+                  <FcHome className="text-xl text-warning" /> Voters Home
+                </NavLink>
+              </li>
               <li className="hover:text-warning md:border-r border-warning">
                 <NavLink to={"/adminDashboard"}>
                   <FcAddDatabase className="text-xl text-warning" /> All Users
