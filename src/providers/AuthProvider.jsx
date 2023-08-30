@@ -57,7 +57,7 @@ const AuthProvider = ({ children }) => {
       // get and set token
       if (currentUser) {
         axios
-          .post("https://data-sphere-portal-server-site.vercel.app/jwt", {
+          .post("http://localhost:5000/jwt", {
             email: currentUser.email,
           })
           .then((data) => {
@@ -74,6 +74,7 @@ const AuthProvider = ({ children }) => {
     };
   }, []);
 
+  console.log(user);
   const authInfo = {
     user,
     loading,

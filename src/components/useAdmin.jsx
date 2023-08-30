@@ -1,25 +1,21 @@
-import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
+import useAxiosSecure from "./useAxiosSecure";
 
 const useAdmin = () => {
-  const [isAdmin, setIsAdmin] = useState([]);
-  const { user } = useContext(AuthContext);
-  console.log(user);
-  const token = localStorage.getItem("voter-access-token");
-
-  useEffect(() => {
-    axios
-      .get(
-        `https://data-sphere-portal-server-site.vercel.app/users/admin/${user?.email}`,
-        {
-          headers: { authorization: `bearer ${token}` },
-        }
-      )
-      .then((res) => {
-        setIsAdmin(res.data);
-      });
-  }, []);
-  return [isAdmin, setIsAdmin];
+  const { user, loading } = useContext(AuthContext);
+  const [axiosSecure] = useAxiosSecure();
+  
+  // use axios secure with react query
+  const { data: isAdmin, isLoading: isAdminLoading } = useQuery({
+    queryKey: ["isAdmin", user?.email],
+    enabled: !loading,
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/users/admin/${user?.email}`);
+      return res.data.admin;
+    },
+  });
+  return [isAdmin, isAdminLoading];
 };
 export default useAdmin;

@@ -41,14 +41,12 @@ const Home = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire("Deleted!", "Your Contact has been deleted.", "success");
-        axios
-          .delete(`https://data-sphere-portal-server-site.vercel.app/${_id}`)
-          .then((res) => {
-            if (res.data.deletedCount > 0) {
-              const remaining = voters.filter((t) => t._id !== _id);
-              setVoters(remaining);
-            }
-          });
+        axios.delete(`http://localhost:5000/${_id}`).then((res) => {
+          if (res.data.deletedCount > 0) {
+            const remaining = voters.filter((t) => t._id !== _id);
+            setVoters(remaining);
+          }
+        });
       }
     });
   };

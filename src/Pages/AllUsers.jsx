@@ -6,29 +6,25 @@ import Swal from "sweetalert2";
 import axios from "axios";
 
 const AllUsers = () => {
-  const [users, setUsers] = useUsers();
+  const [users, refetch] = useUsers();
 
   const handleMakeAdmin = (user) => {
-    axios
-      .patch(
-        `https://data-sphere-portal-server-site.vercel.app/users/admin/${user._id}`
-      )
-      .then((res) => {
-        console.log(res);
-        if (res.data.modifiedCount > 0) {
-          Swal.fire({
-            title: `${user.name} is Admin Now`,
-            icon: "success",
-            showClass: {
-              popup: "animate__animated animate__fadeInDown",
-            },
-            hideClass: {
-              popup: "animate__animated animate__fadeOutUp",
-            },
-          });
-          window.location.reload();
-        }
-      });
+    axios.patch(`http://localhost:5000/users/admin/${user._id}`).then((res) => {
+      console.log(res);
+      if (res.data.modifiedCount > 0) {
+        Swal.fire({
+          title: `${user.name} is Admin Now`,
+          icon: "success",
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+        });
+        refetch();
+      }
+    });
   };
 
   const handleDelete = (_id) => {
@@ -43,16 +39,11 @@ const AllUsers = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire("Deleted!", "Your Contact has been deleted.", "success");
-        axios
-          .delete(
-            `https://data-sphere-portal-server-site.vercel.app/users/${_id}`
-          )
-          .then((res) => {
-            if (res.data.deletedCount > 0) {
-              const remaining = users.filter((t) => t._id !== _id);
-              setUsers(remaining);
-            }
-          });
+        axios.delete(`http://localhost:5000/users/${_id}`).then((res) => {
+          if (res.data.deletedCount > 0) {
+            refetch();
+          }
+        });
       }
     });
   };
