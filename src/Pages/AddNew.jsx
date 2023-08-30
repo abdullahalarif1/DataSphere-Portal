@@ -34,7 +34,10 @@ const AddNew = () => {
 
     // post mongo server
     axios
-      .post("http://localhost:5000/voter-data", newVoter)
+      .post(
+        "https://data-sphere-portal-server-site.vercel.app/voter-data",
+        newVoter
+      )
       .then((res) => {
         console.log("successfully posted:", res);
         if (res.data.insertedId) {

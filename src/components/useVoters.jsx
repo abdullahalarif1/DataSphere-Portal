@@ -5,9 +5,11 @@ const useVoters = () => {
   const [voters, setVoters] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/voter-data").then((res) => {
-      setVoters(res.data);
-    });
+    axios
+      .get("https://data-sphere-portal-server-site.vercel.app/voter-data")
+      .then((res) => {
+        setVoters(res.data);
+      });
   }, []);
   return [voters, setVoters];
 };

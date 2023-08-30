@@ -42,7 +42,7 @@ const SignUp = () => {
         updateUserProfile(data.name).then(() => {
           // users post to mondo db
           axios
-            .post("http://localhost:5000/users", {
+            .post("https://data-sphere-portal-server-site.vercel.app/users", {
               name: data.name,
               email: data.email,
             })
