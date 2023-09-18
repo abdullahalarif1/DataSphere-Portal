@@ -32,6 +32,7 @@ const Dashboard = () => {
     <div className="drawer lg:drawer-open text-white">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content md:items-center justify-center min-h-screen bg-gradient-to-b">
+  
         <Outlet></Outlet>
         <label
           htmlFor="my-drawer-2"
